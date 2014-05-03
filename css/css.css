@@ -1,0 +1,20 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	background-color: #ccc;
+}
+.main {
+	position: relative;
+	margin: 0 auto;
+	width: 1660px;
+	border: 1px solid green;
+	padding: 2px;
+}
+#container div {
+	position: absolute;
+	/*float: left;*/
+	background: #000;
+	border: 2px solid red;
+}
