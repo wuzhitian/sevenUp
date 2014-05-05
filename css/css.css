@@ -3,18 +3,27 @@
 	padding: 0px;
 }
 body {
-	background-color: #ccc;
+	background: url(../img/main_bg.jpg) 0px 0px repeat;
 }
 .main {
 	position: relative;
+	border: 1px solid red;
 	margin: 0 auto;
-	width: 1660px;
-	border: 1px solid green;
-	padding: 2px;
+}
+#sidebar-Nav {
+	height: 500px;
+	float: left;
+	width: 324px;
+	background: #ff0;
+	margin-left: 10px;
+}
+#container {
+	position: relative;
+	height: 300px;
+	margin: 0 auto;
+	/*border: 1px solid green;*/
 }
 #container div {
 	position: absolute;
-	/*float: left;*/
 	background: #000;
-	border: 2px solid red;
 }
