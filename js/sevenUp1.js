@@ -1,10 +1,10 @@
 $(document).ready(function() {
 	var container = $("#container");
 	var iSpace = 10, iDivW = 324, iDivH = 162;
-	setContainerWidth(container);
+	// setContainerWidth(container);
 	var iCeil = Math.floor(parseInt($("#container").css("width")) / iDivW);
 	var aDiv = [];				//div测试色块数组
-	for(var i = 0; i < 40; i++){
+	for(var i = 0; i < 30; i++){
 		var temp = createDiv();
 		aDiv.push(temp);
 	}
@@ -18,11 +18,11 @@ $(document).ready(function() {
 	for(var i = 0; i < aDiv.length*6; i++){
 		aPositionSpace.push(1);
 	}
-	var aDivPositionRatio = recordPosition(aDiv,aDivWidth,aPositionSpace,iCeil); //div该放位置的系数
+	var aDivPositionRatio = recordPosition(); //div该放位置的系数
 	/******************************************/
 	//div定位
 	/******************************************/
-	function setDivPosition(aDivPositionRatio){
+	function setDivPosition(){
 		for(var i = 0; i < aDiv.length; i++){	//读出aDiv[i]的相应位置系数并且定位
 			var tempDivPosition = coordinate(aDivPositionRatio[i][0],aDivPositionRatio[i][1]);
 			aDiv[i].css({
@@ -35,28 +35,52 @@ $(document).ready(function() {
 			aPositionSpace.push(1);
 		}
 	}
-	setDivPosition(aDivPositionRatio);
+	setDivPosition();
 	$("#container").append(aDiv);
 	var oldContainerWidth = $("#container").css("width");
 	$(window).resize(function(){	
-		setContainerWidth(container);
+		// setContainerWidth(container);
 		if(oldContainerWidth != $("#container").css("width")){	//如果$("#container").css("width")没有变化，则不需要重排$("#container div");
 			oldContainerWidth = $("#container").css("width");
 			iCeil = Math.floor(parseInt($("#container").css("width")) / iDivW);
-			aDivPositionRatio = recordPosition(aDiv,aDivWidth,aPositionSpace,iCeil);
-			for(var i = 0; i < aDiv.length; i++){
-				var tempDivPosition = coordinate(aDivPositionRatio[i][0],aDivPositionRatio[i][1]);
-				$("#container div").eq(i).stop().animate({
-					"top": 	tempDivPosition.y,
+			aDivPositionRatio = recordPosition();
+			var tempDivPosition;
+			console.time("time1");
+			$("#container div").each(function(index){
+				tempDivPosition = coordinate(aDivPositionRatio[index][0],aDivPositionRatio[index][1]);
+				$(this).stop().animate({
+					"top": tempDivPosition.y,
 					"left": tempDivPosition.x
-				},500);
-			};
+				},1500);
+			});
+			console.timeEnd("time1");
 			aPositionSpace = [];
 			for(var i = 0; i < aDiv.length*6; i++){
 				aPositionSpace.push(1);
 			};
 		}
 	});
+	// window.addEventListener("orientationchange",function(){
+	// 	if(oldContainerWidth != $("#container").css("width")){	//如果$("#container").css("width")没有变化，则不需要重排$("#container div");
+	// 		oldContainerWidth = $("#container").css("width");
+	// 		iCeil = Math.floor(parseInt($("#container").css("width")) / iDivW);
+	// 		aDivPositionRatio = recordPosition();
+	// 		var tempDivPosition;
+	// 		console.time("time1");
+	// 		$("#container div").each(function(index){
+	// 			tempDivPosition = coordinate(aDivPositionRatio[index][0],aDivPositionRatio[index][1]);
+	// 			$(this).stop().animate({
+	// 				"top": tempDivPosition.y,
+	// 				"left": tempDivPosition.x
+	// 			},500);
+	// 		});
+	// 		console.timeEnd("time1");
+	// 		aPositionSpace = [];
+	// 		for(var i = 0; i < aDiv.length*6; i++){
+	// 			aPositionSpace.push(1);
+	// 		};
+	// 	}
+	// });
 	/******************************************/
 	//根据当前的可视区宽度定义
 	//$("#container"),$("#container").siblings(),$("#container").parent();的宽度,
@@ -67,6 +91,7 @@ $(document).ready(function() {
 		switch(true){
 			case windowWidth >= iDivW*5+iSpace*4:
 				//四+1列	320*4+15*3+(320*1+15)
+				console.log("iDivW*5+iSpace*4::"+(iDivW*5+iSpace*4));
 				obj.css({
 					"width": iDivW*4+iSpace*3,
 					"float": "left"
@@ -78,6 +103,7 @@ $(document).ready(function() {
 				break;
 			case windowWidth < iDivW*5+iSpace*4 && windowWidth >= iDivW*4+iSpace*3:
 				//三+1列	320*3+15*2+(320*1+15)
+				console.log("iDivW*4+iSpace*3::"+(iDivW*4+iSpace*3));
 				obj.css({
 					"width": iDivW*3+iSpace*2,
 					"float": "left"
@@ -89,6 +115,7 @@ $(document).ready(function() {
 				break;
 			case windowWidth < iDivW*4+iSpace*3 && windowWidth >= iDivW*3+iSpace*2:
 				//三列		320*3+15*2
+				console.log("iDivW*3+iSpace*2::"+(iDivW*3+iSpace*2));
 				obj.css({
 					"width": iDivW*3+iSpace*2,
 					"float": "none"
@@ -99,6 +126,7 @@ $(document).ready(function() {
 				obj.siblings().hide();
 				break;
 			case windowWidth >= 768 && windowWidth < iDivW*3+iSpace*2:
+				console.log("iDivW*3+iSpace*2::"+(iDivW*3+iSpace*2));
 				//二列		320*2+15
 				obj.css({
 					"width": iDivW*2+iSpace*1,
@@ -117,7 +145,7 @@ $(document).ready(function() {
 	/******************************************/
 	//返回值为aPositionRecord,函数用于录入aDiv[i]相应的摆放位置系数
 	/******************************************/
-	function recordPosition(aDiv,aDivWidth,aPositionSpace,iCeil){
+	function recordPosition(){
 		var aPositionRecord = []; //记录Div的x系数与y系数
 		var tempIndex = 0;	//记录第一个为零的数组元素下标
 		for(var j = 0; j < aDivWidth.length; j++){

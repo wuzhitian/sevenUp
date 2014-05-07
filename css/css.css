@@ -5,23 +5,100 @@
 body {
 	background: url(../img/main_bg.jpg) 0px 0px repeat;
 }
-.main {
-	position: relative;
-	border: 1px solid red;
-	margin: 0 auto;
+@media screen and (min-width: 1660px ) {
+	/*四+1列*/
+	.main {
+		position: relative;
+		margin: 0 auto;
+		width: 1660px;
+	}
+	#sidebar-Nav {
+		height: 500px;
+		float: left;
+		width: 324px;
+		background: #ff0;
+		margin-left: 10px;
+	}
+	#container {
+		position: relative;
+		float: left;
+		height: 300px;
+		width: 1326px;
+	}
 }
-#sidebar-Nav {
-	height: 500px;
-	float: left;
-	width: 324px;
-	background: #ff0;
-	margin-left: 10px;
+@media screen and (min-width: 1326px ) and (max-width: 1659px ) {
+	/*三+1列*/
+	.main {
+		position: relative;
+		margin: 0 auto;
+		width: 1326px;
+	}
+	#sidebar-Nav {
+		height: 500px;
+		float: left;
+		width: 324px;
+		background: #ff0;
+		margin-left: 10px;
+	}
+	#container {
+		position: relative;
+		float: left;
+		height: 300px;
+		width: 992px;
+		margin: 0 auto;
+	}
 }
-#container {
-	position: relative;
-	height: 300px;
-	margin: 0 auto;
-	/*border: 1px solid green;*/
+@media screen and (min-width: 992px) and (max-width: 1325px ){
+	/*三列*/
+	.main {
+		position: relative;
+		margin: 0 auto;
+		width: 992px;
+	}
+	#sidebar-Nav {
+		display: none;
+	}
+	#container {
+		position: relative;
+		height: 300px;
+		width: 992px;
+		margin: 0 auto;
+	}
+	
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	/*两列*/
+	.main {
+		position: relative;
+		margin: 0 auto;
+		width: 658px;
+	}
+	#sidebar-Nav {
+		display: none;
+	}
+	#container {
+		position: relative;
+		height: 300px;
+		width: 658px;
+		margin: 0 auto;
+	}
+}
+@media screen and (max-width: 767px) {
+	/*两列*/
+	.main {
+		position: relative;
+		margin: 0 auto;
+		width: 658px;
+	}
+	#sidebar-Nav {
+		display: none;
+	}
+	#container {
+		position: relative;
+		height: 300px;
+		width: 658px;
+		margin: 0 auto;
+	}
 }
 #container div {
 	position: absolute;

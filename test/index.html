@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 	<title>瀑布流</title>
 	<style type="text/css">
 	* {
@@ -126,7 +127,7 @@
 			}
 			oContainer.find('img').each(function(){
 				var _index = getMin();
-				$(this).animate({
+				$(this).stop().animate({
 					left : arrL[_index],
 					top  : arrT[_index]
 				},1000);
