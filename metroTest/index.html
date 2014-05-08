@@ -16,7 +16,7 @@
 /* 格子排序 */
 var metro = {};
 metro.init=function(wrap){
-	metro.gen={w:190,h:170};
+	metro.gen={w:290,h:270};
 	metro.wrap = wrap;
 	metro.sizeArray= []; //格子,[1,2]就表示1X2的大格子
 	metro.preset();
@@ -150,11 +150,11 @@ metro.sort = function(size){
 	function setPos(x,y,n){
 		var left = metro.gen.w * x,
 			top = metro.gen.h * y;
-		metro.mbox[n].style.cssText = "position:absolute;left:"+ left +"px;top:" + top + "px;";
-		// $(metro.mbox[n]).css("position","absolute").animate({
-		// 	"left": left,
-		// 	"top": top
-		// },1500);
+		// metro.mbox[n].style.cssText = "position:absolute;left:"+ left +"px;top:" + top + "px;";
+		$(metro.mbox[n]).css("position","absolute").animate({
+			"left": left,
+			"top": top
+		},1500);
 	}
 };
 </script>
@@ -213,8 +213,8 @@ function createTestData(n){
 	for(var i = 0; i < n; i++) {
 		color = colorList[(colorList.length * Math.random())>>0];
 		if(!(Math.random()*3 >> 0)){ //输出大<a href='http://www.zztuku.com/tags/模块.html' target='_blank'><u>模块</u></a>测试数据。宽高在一个范围内都是随意的，未做其他限制
-			height = Math.floor(Math.random()*200 + 100);
-			width = Math.floor(Math.random()*200 + 100);
+			height = Math.floor(Math.random()*200 + 200);
+			width = Math.floor(Math.random()*200 + 200);
 			content += '<div class="MBox"><div class="widgetBox bigBox" style="background:'+color+'"><div style="width:' + width +'px;height:' + height +'px;margin:0 auto;" class="innerBox">'+iTestforWU+'</div></div></div>';
 		}else{ //输出普通<a href='http://www.zztuku.com/tags/模块.html' target='_blank'><u>模块</u></a>数据
 			content += '<div class="MBox"><div class="widgetBox" style="background:'+color+'">'+iTestforWU+'</div></div>';
