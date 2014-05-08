@@ -42,6 +42,7 @@ metro.putData = function(list){
 		var i = 0, nx, ny, bigBoxCont;
 		while(i < bigBox.length){
 			bigBoxCont =  $class("innerBox",bigBox[i]);
+			//计算div.bigBox>div.innerBox的宽度，向上取整，设定div.bigBox的合适宽度
 			nx = Math.ceil(bigBoxCont[0].offsetWidth / metro.gen.w); //bigBox横向占的块数
 			ny = Math.ceil(bigBoxCont[0].offsetHeight / metro.gen.h);
 			bigBox[i].style.width = nx*metro.gen.w - 10 + 'px' ;
@@ -51,7 +52,6 @@ metro.putData = function(list){
 	})();
 	metro.mbox = $class("MBox",list);
 	var i = 0 , nx, ny, tempSizeArray = [];
-	console.log(this);
 	while( i < this.mbox.length){
 		if( $class("bigBox",this.mbox[i]).length > 0 ){
 			nx = Math.ceil(this.mbox[i].offsetWidth / this.gen.w);
@@ -64,6 +64,7 @@ metro.putData = function(list){
 		i++;
 	}
 	this.sizeArray = this.sizeArray.concat(tempSizeArray);
+	console.log(tempSizeArray);
 	metro.sort(tempSizeArray);
 }
 metro.sort = function(size){
@@ -72,11 +73,16 @@ metro.sort = function(size){
 		memory = metro.memory,
 		name;
 	for(var n=0; n < size.length ; n++){
+
+
 		if(memory.flag == 0){
 			x = memory.x;
 			y = memory.y;
 		}
 		memory.flag --;
+		console.log("83:::::::::::"+memory.flag);
+
+
 		if(x > metro.row-1){ //换行
 			x = 0;
 			y ++;
@@ -85,7 +91,8 @@ metro.sort = function(size){
 		if(name in this.nameSpace) {  //判断属性名是否存在
 			n--;
 			x++;
-			memory.flag < Infinity && memory.flag++;
+			// memory.flag < Infinity && memory.flag++;
+			memory.flag++;
 			continue;
 		}
 		if(size[n][0] * size[n][1] == 1){  //普通格子
@@ -132,8 +139,11 @@ metro.sort = function(size){
 		for(var t=0; t < item[0]; t++) {
 			for(var k=0; k < item[1]; k++){
 				name = (x+t)+'_'+(y+k);
+				// console.log("x:"+x+";y:"+y);
+				// console.log(name);
 				if(t==0 && k==0)   continue;
 				metro.nameSpace[name] = 0;   //多占的格子无坐标值
+				// console.log("break");
 			}
 		}
 	};
@@ -216,7 +226,7 @@ function createTestData(n){
 	return spanWrap;
 }
 window.onload = function(){
-	createTestData(35);
+	createTestData(10);
 	metro.init(myMetro);
 };
 window.onresize = function(){

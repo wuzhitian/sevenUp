@@ -42,15 +42,8 @@ metro.init = function(wrap){
 metro.preset = function(){
 	metro.nameSpace = {};
 	metro.maxY = -1;
-	metro.basePos = {
-		x: 0,
-		y: 0
-	};
-	metro.memory = {
-		flag: Infinity,
-		x: Infinity,
-		y: Infinity
-	};
+	metro.basePos = {x: 0, y: 0};
+	metro.memory = {flag: Infinity,	x: Infinity, y: Infinity};
 	metro.row = document.documentElement.offsetWidth / metro.gen.w >> 0;
 	metro.wrap.style.width = metro.row * metro.gen.w + "px";
 };
@@ -101,7 +94,7 @@ metro.sort = function(size){
 			y = memory.y;
 		}
 		memory.flag --;
-		if(x > metro.row - 1){
+		if(x > metro.row - 1){	//换行
 			x = 0;
 			y ++;
 		}
