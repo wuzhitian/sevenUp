@@ -51,7 +51,7 @@ $(document).ready(function() {
 				$(this).stop().animate({
 					"top": tempDivPosition.y,
 					"left": tempDivPosition.x
-				},1500);
+				},700);
 			});
 			console.timeEnd("time1");
 			aPositionSpace = [];

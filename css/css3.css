@@ -3,7 +3,7 @@
 	padding: 0px;
 }
 body {
-	background: url(../img/main_bg.jpg) 0px 0px repeat;
+	/*background: url(../img/main_bg.jpg) 0px 0px repeat;*/
 }
 @media screen and (min-width: 1660px ) {
 	/*四+1列*/
@@ -102,5 +102,5 @@ body {
 }
 #container div {
 	position: absolute;
-	/*background: #000;*/
+	background: #000;
 }
